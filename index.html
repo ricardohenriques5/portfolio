@@ -3,274 +3,440 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Ricardo Henriques — Web & Fotografia</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Syne:wght@400;700;800&family=Epilogue:wght@200;300;700&family=EB+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300;1,9..144,400&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet"/>
-
+<title>Ricardo Henriques — Web Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Syne:wght@400;700;800&family=Epilogue:wght@200;300;400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden;cursor:none}
+body{font-family:'Epilogue',sans-serif;background:#f8f6f2;color:#0d0d0d;overflow-x:hidden;cursor:none}
 
-.cursor{position:fixed;width:8px;height:8px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;mix-blend-mode:difference}
-.cursor-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(255,255,255,0.6);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .2s,height .2s}
-.progress{position:fixed;top:0;left:0;width:0%;height:1px;background:rgba(255,255,255,0.5);z-index:9997}
+/* CURSOR */
+.cursor{position:fixed;width:7px;height:7px;background:#0d0d0d;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s}
+.cursor-ring{position:fixed;width:30px;height:30px;border:1px solid rgba(13,13,13,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:2000;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:transform .5s cubic-bezier(0.16,1,0.3,1),opacity .5s ease}
+/* PROGRESS */
+.progress{position:fixed;top:0;left:0;width:0%;height:1px;background:#0d0d0d;z-index:9997}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:2000;
+  padding:1.8rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:transform .5s cubic-bezier(0.16,1,0.3,1),opacity .5s ease;
+  mix-blend-mode:difference;
+}
 nav.nav-hidden{transform:translateY(-100%);opacity:0}
 nav.nav-visible{transform:translateY(0);opacity:1}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:300;font-style:italic;letter-spacing:0.08em;color:#fff;text-decoration:none;mix-blend-mode:difference;transition:opacity .3s}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-weight:300;font-style:italic;
+  letter-spacing:0.06em;color:#fff;text-decoration:none;
+  transition:opacity .3s;
+}
 .nav-logo:hover{opacity:0.5}
-.nav-burger{display:flex;flex-direction:column;justify-content:center;gap:6px;width:32px;height:32px;background:none;border:none;cursor:none;mix-blend-mode:difference;position:relative;z-index:2100}
+.nav-burger{
+  display:flex;flex-direction:column;justify-content:center;
+  gap:6px;width:28px;height:28px;
+  background:none;border:none;cursor:none;
+}
 .nav-burger span{display:block;width:100%;height:1px;background:#fff;transition:transform .45s cubic-bezier(0.16,1,0.3,1),opacity .3s,width .4s;transform-origin:center}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav-burger.open span:nth-child(2){opacity:0;width:0}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* MENU OVERLAY */
-.menu-overlay{position:fixed;inset:0;z-index:1999;background:#080808;display:flex;flex-direction:column;justify-content:center;padding:0 4rem;pointer-events:none;opacity:0;clip-path:inset(0 0 100% 0);transition:clip-path .75s cubic-bezier(0.16,1,0.3,1),opacity .4s ease}
+.menu-overlay{
+  position:fixed;inset:0;z-index:1999;
+  background:#0d0d0d;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 4rem;
+  pointer-events:none;opacity:0;
+  clip-path:inset(0 0 100% 0);
+  transition:clip-path .75s cubic-bezier(0.16,1,0.3,1),opacity .4s ease;
+}
 .menu-overlay.open{pointer-events:all;opacity:1;clip-path:inset(0 0 0% 0)}
 .menu-nav{list-style:none;margin-bottom:3rem}
-.menu-nav li{overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.06)}
-.menu-nav li a{display:flex;align-items:baseline;gap:1.5rem;padding:1.1rem 0;font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5.5vw,5rem);font-weight:300;color:#fff;text-decoration:none;letter-spacing:-0.01em;line-height:1;transform:translateY(110%);transition:transform .65s cubic-bezier(0.16,1,0.3,1),color .3s}
+.menu-nav li{overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.07)}
+.menu-nav li a{
+  display:flex;align-items:baseline;gap:1.5rem;
+  padding:1rem 0;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,6vw,5.5rem);
+  font-weight:300;color:#f8f6f2;text-decoration:none;
+  transform:translateY(110%);
+  transition:transform .65s cubic-bezier(0.16,1,0.3,1),color .3s;
+}
 .menu-overlay.open .menu-nav li a{transform:translateY(0)}
 .menu-nav li:nth-child(1) a{transition-delay:.04s}
 .menu-nav li:nth-child(2) a{transition-delay:.08s}
 .menu-nav li:nth-child(3) a{transition-delay:.12s}
 .menu-nav li:nth-child(4) a{transition-delay:.16s}
-.menu-nav li:nth-child(5) a{transition-delay:.20s}
-.menu-nav li:nth-child(6) a{transition-delay:.24s}
-.menu-nav li:nth-child(7) a{transition-delay:.28s}
-.menu-num{font-family:'Space Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.22);letter-spacing:0.1em}
 .menu-nav li a:hover{color:rgba(255,255,255,0.3)}
-.menu-footer{display:flex;gap:3rem;align-items:center;opacity:0;transform:translateY(16px);transition:opacity .5s .48s,transform .5s .48s}
+.menu-footer{
+  display:flex;gap:3rem;align-items:center;
+  opacity:0;transform:translateY(14px);
+  transition:opacity .5s .4s,transform .5s .4s;
+}
 .menu-overlay.open .menu-footer{opacity:1;transform:none}
-.menu-footer-link{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.22);text-decoration:none;transition:color .3s}
+.menu-footer-link{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);text-decoration:none;transition:color .3s}
 .menu-footer-link:hover{color:#fff}
-.menu-cta{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.35);padding-bottom:2px;margin-left:auto;transition:opacity .3s}
+.menu-cta{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:#f8f6f2;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.3);padding-bottom:2px;margin-left:auto;transition:opacity .3s}
 .menu-cta:hover{opacity:0.5}
 
 /* REVEAL */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .95s cubic-bezier(0.16,1,0.3,1),transform .95s cubic-bezier(0.16,1,0.3,1)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(0.16,1,0.3,1),transform .9s cubic-bezier(0.16,1,0.3,1)}
 .reveal.in{opacity:1;transform:none}
-.reveal-delay-1{transition-delay:.12s}
-.reveal-delay-2{transition-delay:.24s}
-.reveal-delay-3{transition-delay:.36s}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
 
-/* ── VIDEO HERO — Cormorant Garamond ── */
-.site-hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end}
-.site-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:brightness(0.45) saturate(0.7)}
-.site-hero .hero-ov{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.05) 55%,transparent 100%)}
-.site-hero-content{position:relative;z-index:2;padding:4.5rem 4rem;width:100%}
-.site-hero-eyebrow{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:2rem;display:block}
-.site-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,10vw,11rem);font-weight:300;line-height:0.88;color:#fff;letter-spacing:-0.02em}
-.site-hero h1 em{font-style:italic;display:block}
-.site-hero-sub{margin-top:2.5rem;font-family:'Outfit',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.38);line-height:2;font-weight:300;max-width:340px}
-.site-hero-scroll{position:absolute;bottom:2.8rem;right:4rem;z-index:2;display:flex;align-items:center;gap:12px;font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.22)}
-.site-hero-scroll::before{content:'';display:block;width:38px;height:1px;background:rgba(255,255,255,0.18)}
+/* ══════════════════════════════════
+   1. VIDEO HERO — full height, dark
+══════════════════════════════════ */
+.hero{
+  height:100vh;position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;
+  background:#0d0d0d;
+}
+.hero video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;z-index:0;
+  filter:brightness(0.38) saturate(0.6);
+}
+.hero-ov{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.0) 50%);
+}
+.hero-content{position:relative;z-index:2;padding:4rem 4rem;width:100%}
+.hero-eyebrow{
+  font-family:'Space Mono',monospace;
+  font-size:0.55rem;letter-spacing:0.35em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);margin-bottom:1.8rem;display:block;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(4rem,10vw,10.5rem);
+  font-weight:300;line-height:0.9;color:#fff;
+}
+.hero h1 em{font-style:italic;display:block}
+.hero-sub{
+  margin-top:2rem;
+  font-family:'Epilogue',sans-serif;
+  font-size:0.78rem;color:rgba(255,255,255,0.38);
+  line-height:2;font-weight:300;max-width:320px;
+}
+.hero-scroll{
+  position:absolute;bottom:2.5rem;right:4rem;z-index:2;
+  display:flex;align-items:center;gap:10px;
+  font-family:'Space Mono',monospace;
+  font-size:0.52rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(255,255,255,0.2);
+}
+.hero-scroll::before{content:'';display:block;width:35px;height:1px;background:rgba(255,255,255,0.18)}
 
-/* ── 01 RESTAURAÇÃO — DM Serif Display + Libre Baskerville ── */
-.rest-hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end}
-.rest-hero .bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85') center/cover no-repeat;transform:scale(1.05);transition:transform 8s ease}
-.rest-hero:hover .bg{transform:scale(1.0)}
-.rest-hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,4,2,0.94) 0%,rgba(8,4,2,0.2) 55%,transparent 100%)}
-.rest-hero-content{position:relative;z-index:2;padding:4rem 4rem;width:100%}
-.rest-num{font-family:'Libre Baskerville',serif;font-size:0.6rem;font-style:italic;letter-spacing:0.2em;color:#c8956a;margin-bottom:1.2rem;display:block}
-.rest-hero h1{font-family:'DM Serif Display',serif;font-size:clamp(4.5rem,10vw,10.5rem);font-weight:400;line-height:0.9;color:#f5ede0;letter-spacing:-0.01em}
-.rest-hero h1 em{font-style:italic;display:block;color:#c8956a}
-.rest-hero-sub{max-width:400px;margin-top:1.8rem;font-family:'Libre Baskerville',serif;font-size:0.82rem;font-style:italic;color:rgba(245,237,224,0.5);line-height:1.95}
-.rest-split{display:grid;grid-template-columns:1fr 1fr;min-height:70vh;background:#0d0704}
-.rest-split-img{position:relative;overflow:hidden}
-.rest-split-img img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.8)}
-.rest-split-text{padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center;background:#0d0704}
-.rest-split-text .label{font-family:'Libre Baskerville',serif;font-size:0.6rem;font-style:italic;letter-spacing:0.2em;color:#c8956a;margin-bottom:2rem}
-.rest-split-text h2{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,3.8vw,4rem);font-weight:400;color:#f5ede0;line-height:1.1;margin-bottom:1.5rem}
-.rest-split-text h2 em{font-style:italic;color:#c8956a}
-.rest-split-text p{font-family:'Libre Baskerville',serif;font-size:0.82rem;color:rgba(245,237,224,0.45);line-height:2;max-width:380px}
-.rest-features{display:grid;grid-template-columns:repeat(3,1fr);background:#080402}
-.rest-feat{padding:3.5rem;border-right:1px solid rgba(200,149,106,0.08)}
-.rest-feat:last-child{border-right:none}
-.rest-feat-num{font-family:'DM Serif Display',serif;font-size:3.5rem;font-weight:400;color:#c8956a;opacity:0.2;margin-bottom:1rem;line-height:1}
-.rest-feat h3{font-family:'DM Serif Display',serif;font-size:1rem;font-weight:400;color:#f5ede0;margin-bottom:0.8rem}
-.rest-feat p{font-family:'Libre Baskerville',serif;font-size:0.75rem;color:rgba(245,237,224,0.35);line-height:1.9}
-.rest-quote{height:60vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.rest-quote .bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1800&q=80') center/cover no-repeat}
-.rest-quote .ov{position:absolute;inset:0;background:rgba(8,4,2,0.78)}
-.rest-quote-text{position:relative;z-index:2;text-align:center;padding:0 3rem;max-width:820px}
-.rest-quote-text blockquote{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4.5vw,4rem);font-weight:400;font-style:italic;color:#f5ede0;line-height:1.25}
-.rest-quote-text cite{display:block;margin-top:1.5rem;font-family:'Libre Baskerville',serif;font-size:0.6rem;font-style:italic;letter-spacing:0.2em;color:#c8956a}
+/* ══════════════════════════════════
+   2. FOTO GRID — vertical + horizontal
+══════════════════════════════════ */
+.photo-grid{
+  display:grid;
+  grid-template-columns:1fr 1.6fr;
+  gap:0;
+  height:85vh;
+  background:#f8f6f2;
+}
+.photo-grid-left{
+  position:relative;overflow:hidden;
+  border-right:4px solid #f8f6f2;
+}
+.photo-grid-left img{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(0.7);
+  transition:transform 7s ease,filter .5s;
+}
+.photo-grid-left:hover img{transform:scale(1.04);filter:saturate(1)}
+.photo-grid-right{
+  position:relative;overflow:hidden;
+}
+.photo-grid-right img{
+  width:100%;height:100%;object-fit:cover;
+  object-position:center 30%;
+  filter:saturate(0.7);
+  transition:transform 7s ease,filter .5s;
+}
+.photo-grid-right:hover img{transform:scale(1.04);filter:saturate(1)}
 
-/* ── 02 TATUAGEM — Bebas Neue + Space Mono ── */
-.tat-hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
-.tat-hero .bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1598520106830-8c45c2035460?w=1800&q=85') center/cover no-repeat;transition:transform 8s ease;transform:scale(1.05)}
-.tat-hero:hover .bg{transform:scale(1.0)}
-.tat-hero .ov{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,0.96) 38%,rgba(0,0,0,0.1) 100%)}
-.tat-hero-content{position:relative;z-index:2;padding:0 4rem;max-width:750px}
-.tat-num{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-bottom:1.5rem;display:block}
-.tat-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(6rem,14vw,15rem);font-weight:400;line-height:0.85;color:#fff;letter-spacing:0.03em}
-.tat-hero h1 span{display:block;color:rgba(255,255,255,0.12)}
-.tat-hero-sub{margin-top:2.5rem;font-family:'Space Mono',monospace;font-size:0.72rem;color:rgba(255,255,255,0.32);line-height:1.8;max-width:360px}
-.tat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:50vh 50vh;background:#050505}
-.tat-cell{position:relative;overflow:hidden}
-.tat-cell img{width:100%;height:100%;object-fit:cover;filter:grayscale(0.4) contrast(1.15);transition:transform 6s ease,filter .5s}
-.tat-cell:hover img{transform:scale(1.04);filter:grayscale(0) contrast(1.1)}
-.tat-cell-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.35);transition:background .4s}
-.tat-cell:hover .tat-cell-overlay{background:rgba(0,0,0,0.1)}
-.tat-cell-big{grid-column:1/3;grid-row:1/2}
-.tat-cell-label{position:absolute;bottom:1.5rem;left:1.5rem;font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.38)}
-.tat-text{background:#050505;padding:5rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-.tat-text-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,7rem);font-weight:400;color:#fff;line-height:0.9;letter-spacing:0.04em}
-.tat-text-left h2 em{font-style:normal;color:rgba(255,255,255,0.15)}
-.tat-text-right p{font-family:'Space Mono',monospace;font-size:0.72rem;color:rgba(255,255,255,0.32);line-height:1.9;margin-bottom:1.5rem}
+/* ══════════════════════════════════
+   3. SERVIÇOS — texto, fundo claro
+══════════════════════════════════ */
+.services{
+  background:#f8f6f2;
+  padding:8rem 4rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6rem;
+  align-items:start;
+}
+.services-left{}
+.services-tag{
+  font-family:'Space Mono',monospace;
+  font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(13,13,13,0.3);margin-bottom:2rem;display:block;
+}
+.services-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.8rem,5vw,5.5rem);
+  font-weight:300;line-height:0.95;color:#0d0d0d;
+  margin-bottom:0;
+}
+.services-title em{font-style:italic}
+.services-right{padding-top:1rem}
+.services-list{list-style:none}
+.services-list li{
+  padding:1.8rem 0;
+  border-bottom:1px solid rgba(13,13,13,0.08);
+  display:flex;justify-content:space-between;align-items:baseline;
+}
+.services-list li:first-child{border-top:1px solid rgba(13,13,13,0.08)}
+.service-name{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.1rem,2vw,1.5rem);
+  font-weight:700;color:#0d0d0d;
+  letter-spacing:-0.02em;
+}
+.service-desc{
+  font-family:'Epilogue',sans-serif;
+  font-size:0.72rem;font-weight:300;
+  color:rgba(13,13,13,0.4);
+  max-width:240px;text-align:right;
+  line-height:1.6;
+}
+.services-cta{
+  margin-top:3.5rem;display:inline-flex;align-items:center;gap:14px;
+  font-family:'Space Mono',monospace;font-size:0.58rem;
+  letter-spacing:0.2em;text-transform:uppercase;color:#0d0d0d;
+  text-decoration:none;transition:gap .3s;
+}
+.services-cta:hover{gap:24px}
+.cta-line{width:40px;height:1px;background:#0d0d0d;transition:width .3s}
+.services-cta:hover .cta-line{width:60px}
 
-/* ── 03 DANÇA — Bodoni Moda ── */
-.dan-hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:flex-end}
-.dan-hero .bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1800&q=85') center 20%/cover no-repeat;transition:transform 8s ease;transform:scale(1.05)}
-.dan-hero:hover .bg{transform:scale(1.0)}
-.dan-hero .ov{position:absolute;inset:0;background:linear-gradient(to left,rgba(245,240,235,0.96) 38%,rgba(245,240,235,0.02) 100%)}
-.dan-hero-content{position:relative;z-index:2;padding:0 4.5rem;max-width:600px;text-align:right}
-.dan-num{font-family:'Bodoni Moda',serif;font-size:0.6rem;font-style:italic;letter-spacing:0.25em;color:rgba(26,22,18,0.32);margin-bottom:1.5rem;display:block}
-.dan-hero h1{font-family:'Bodoni Moda',serif;font-size:clamp(3.5rem,8vw,8.5rem);font-weight:300;line-height:0.93;color:#1a1612;letter-spacing:-0.01em}
-.dan-hero h1 em{font-style:italic;display:block;font-size:1.1em}
-.dan-hero-sub{margin-top:1.8rem;font-family:'Bodoni Moda',serif;font-size:0.82rem;font-style:italic;color:rgba(26,22,18,0.42);line-height:1.95}
-.dan-split{display:grid;grid-template-columns:1.2fr 1fr;min-height:80vh;background:#faf7f2}
-.dan-split-text{padding:5.5rem 4rem;display:flex;flex-direction:column;justify-content:center;background:#faf7f2}
-.dan-split-text .label{font-family:'Bodoni Moda',serif;font-size:0.6rem;font-style:italic;letter-spacing:0.2em;color:rgba(26,22,18,0.28);margin-bottom:2rem}
-.dan-split-text h2{font-family:'Bodoni Moda',serif;font-size:clamp(2.2rem,3.5vw,3.5rem);font-weight:300;color:#1a1612;line-height:1.15;margin-bottom:1.5rem}
-.dan-split-text h2 em{font-style:italic}
-.dan-split-text p{font-family:'Bodoni Moda',serif;font-size:0.82rem;font-style:italic;color:rgba(26,22,18,0.42);line-height:2;max-width:400px;margin-bottom:1.5rem}
-.dan-split-img{position:relative;overflow:hidden}
-.dan-split-img img{width:100%;height:100%;object-fit:cover;object-position:center 10%}
-.dan-trio{display:grid;grid-template-columns:1fr 1fr 1fr;height:55vh;background:#f5f0eb}
-.dan-trio-img{overflow:hidden;position:relative}
-.dan-trio-img img{width:100%;height:100%;object-fit:cover;filter:saturate(0.65);transition:filter .5s,transform 5s}
-.dan-trio-img:hover img{filter:saturate(1);transform:scale(1.03)}
+/* ══════════════════════════════════
+   4. PORTFÓLIO — carrossel horizontal
+══════════════════════════════════ */
+.portfolio{background:#0d0d0d;padding:6rem 0 6rem 4rem}
+.portfolio-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding-right:4rem;margin-bottom:3rem;
+}
+.portfolio-tag{
+  font-family:'Space Mono',monospace;
+  font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);display:block;margin-bottom:1rem;
+}
+.portfolio-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,4rem);
+  font-weight:300;font-style:italic;color:#f8f6f2;
+}
+.portfolio-arrows{display:flex;gap:1rem}
+.portfolio-arrow{
+  width:44px;height:44px;border:1px solid rgba(255,255,255,0.18);
+  background:none;color:#fff;font-size:1rem;cursor:none;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .3s,border-color .3s;
+}
+.portfolio-arrow:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.4)}
 
-/* ── 04 ARQUITECTURA — Syne + Epilogue ── */
-.arq-hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
-.arq-hero .bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1800&q=85') center/cover no-repeat;transition:transform 8s ease;transform:scale(1.05)}
-.arq-hero:hover .bg{transform:scale(1.0)}
-.arq-hero .ov{position:absolute;inset:0;background:linear-gradient(to right,rgba(232,228,223,0.98) 35%,rgba(232,228,223,0.0) 100%)}
-.arq-hero-content{position:relative;z-index:2;padding:0 4rem;max-width:640px}
-.arq-num{font-family:'Epilogue',sans-serif;font-size:0.55rem;font-weight:300;letter-spacing:0.4em;text-transform:uppercase;color:rgba(13,13,13,0.28);margin-bottom:1.5rem;display:block}
-.arq-hero h1{font-family:'Syne',sans-serif;font-size:clamp(3rem,7.5vw,8rem);font-weight:800;line-height:0.92;color:#0d0d0d;letter-spacing:-0.04em}
-.arq-hero h1 em{font-style:normal;font-weight:400;display:block;color:rgba(13,13,13,0.25);letter-spacing:-0.02em}
-.arq-hero-sub{margin-top:1.8rem;font-family:'Epilogue',sans-serif;font-size:0.78rem;font-weight:300;color:rgba(13,13,13,0.38);line-height:1.95;max-width:360px}
-.arq-full{height:70vh;position:relative;overflow:hidden}
-.arq-full img{width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:contrast(1.05) saturate(0.35)}
-.arq-full-caption{position:absolute;bottom:2rem;right:4rem;font-family:'Epilogue',sans-serif;font-size:0.55rem;font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:#0d0d0d;opacity:0.28}
-.arq-grid{display:grid;grid-template-columns:1fr 1fr;background:#e8e4df}
-.arq-grid-img{height:65vh;overflow:hidden}
-.arq-grid-img img{width:100%;height:100%;object-fit:cover;filter:saturate(0.3);transition:filter .6s,transform 6s}
-.arq-grid-img:hover img{filter:saturate(0.7);transform:scale(1.03)}
-.arq-grid-text{padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center;background:#e8e4df}
-.arq-grid-text .label{font-family:'Epilogue',sans-serif;font-size:0.55rem;font-weight:300;letter-spacing:0.35em;text-transform:uppercase;color:rgba(13,13,13,0.22);margin-bottom:2rem}
-.arq-grid-text h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.2vw,3.2rem);font-weight:700;color:#0d0d0d;line-height:1.1;margin-bottom:1.5rem;letter-spacing:-0.03em}
-.arq-grid-text p{font-family:'Epilogue',sans-serif;font-size:0.78rem;font-weight:300;color:rgba(13,13,13,0.38);line-height:2;max-width:380px}
+.portfolio-track-wrap{overflow:hidden}
+.portfolio-track{
+  display:flex;gap:1.5rem;
+  transition:transform .6s cubic-bezier(0.16,1,0.3,1);
+}
+.portfolio-item{
+  flex:0 0 320px;position:relative;
+  cursor:none;
+}
+.portfolio-item-img{
+  height:420px;overflow:hidden;position:relative;
+  background:#1a1a1a;
+}
+.portfolio-item-img img{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(0.5) brightness(0.9);
+  transition:filter .5s,transform 6s ease;
+}
+.portfolio-item:hover .portfolio-item-img img{
+  filter:saturate(1) brightness(1);transform:scale(1.04);
+}
+.portfolio-item-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 50%);
+  transition:background .4s;
+}
+.portfolio-item:hover .portfolio-item-overlay{background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,transparent 60%)}
+.portfolio-item-info{
+  position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;
+}
+.portfolio-item-name{
+  font-family:'Syne',sans-serif;
+  font-size:0.9rem;font-weight:700;color:#fff;
+  letter-spacing:-0.01em;margin-bottom:0.3rem;
+}
+.portfolio-item-type{
+  font-family:'Space Mono',monospace;
+  font-size:0.52rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);
+}
+.portfolio-item-link{
+  position:absolute;inset:0;z-index:2;
+}
 
-/* ── 05 LUXO — EB Garamond ── */
-.lux-hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
-.lux-hero .bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1800&q=85') center/cover no-repeat;transition:transform 8s ease;transform:scale(1.05)}
-.lux-hero:hover .bg{transform:scale(1.0)}
-.lux-hero .ov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(8,7,5,0.94) 45%,rgba(8,7,5,0.1) 100%)}
-.lux-hero-content{position:relative;z-index:2;padding:0 4rem;max-width:700px}
-.lux-num{font-family:'EB Garamond',serif;font-size:0.65rem;font-style:italic;letter-spacing:0.15em;color:#c9a84c;margin-bottom:2rem;display:block}
-.lux-hero h1{font-family:'EB Garamond',serif;font-size:clamp(3.5rem,8.5vw,9rem);font-weight:300;line-height:0.93;color:#e8d5a3;letter-spacing:0.01em}
-.lux-hero h1 em{font-style:italic;display:block}
-.lux-hero-sub{margin-top:2rem;font-family:'EB Garamond',serif;font-size:0.92rem;font-style:italic;color:rgba(232,213,163,0.38);line-height:1.95;max-width:380px}
-.lux-split{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;background:#0c0b09}
-.lux-split-img{position:relative;overflow:hidden}
-.lux-split-img img{width:100%;height:100%;object-fit:cover;filter:saturate(0.5);transition:filter .6s,transform 6s}
-.lux-split-img:hover img{filter:saturate(0.85);transform:scale(1.03)}
-.lux-split-text{padding:5.5rem 4rem;display:flex;flex-direction:column;justify-content:center;background:#0c0b09;border-left:1px solid rgba(201,168,76,0.07)}
-.lux-split-text .label{font-family:'EB Garamond',serif;font-size:0.65rem;font-style:italic;letter-spacing:0.15em;color:#c9a84c;margin-bottom:2rem}
-.lux-split-text h2{font-family:'EB Garamond',serif;font-size:clamp(2rem,3.2vw,3.5rem);font-weight:300;color:#e8d5a3;line-height:1.2;margin-bottom:1.5rem}
-.lux-split-text h2 em{font-style:italic}
-.lux-split-text p{font-family:'EB Garamond',serif;font-size:0.92rem;font-style:italic;color:rgba(232,213,163,0.36);line-height:2;max-width:380px}
-.lux-full{height:60vh;position:relative;overflow:hidden}
-.lux-full img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(0.4) brightness(0.65)}
-.lux-full .ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.lux-full-quote{text-align:center;padding:0 3rem}
-.lux-full-quote p{font-family:'EB Garamond',serif;font-size:clamp(1.6rem,3.8vw,3.2rem);font-weight:300;font-style:italic;color:#e8d5a3;line-height:1.45;max-width:820px}
-.lux-full-quote span{display:block;margin-top:1.5rem;font-family:'EB Garamond',serif;font-size:0.65rem;font-style:italic;letter-spacing:0.15em;color:#c9a84c}
+/* placeholder cards */
+.portfolio-item-img.placeholder{
+  display:flex;align-items:center;justify-content:center;
+}
+.placeholder-inner{
+  text-align:center;
+}
+.placeholder-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-style:italic;
+  color:rgba(255,255,255,0.15);
+}
+.placeholder-sub{
+  font-family:'Space Mono',monospace;
+  font-size:0.48rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(255,255,255,0.08);margin-top:0.5rem;
+}
 
-/* ── 06 CABELEIREIROS — Josefin Sans + Fraunces ── */
-.cab-hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end}
-.cab-hero .bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1800&q=85') center/cover no-repeat;transition:transform 8s ease;transform:scale(1.05)}
-.cab-hero:hover .bg{transform:scale(1.0)}
-.cab-hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,8,10,0.95) 0%,rgba(12,8,10,0.2) 55%,transparent 100%)}
-.cab-hero-content{position:relative;z-index:2;padding:4rem 4rem;width:100%}
-.cab-num{font-family:'Josefin Sans',sans-serif;font-size:0.55rem;font-weight:200;letter-spacing:0.45em;text-transform:uppercase;color:#c49a8a;margin-bottom:1.2rem;display:block}
-.cab-hero h1{font-family:'Fraunces',serif;font-size:clamp(4rem,9.5vw,10rem);font-weight:300;line-height:0.9;color:#f7ede8;letter-spacing:-0.01em}
-.cab-hero h1 em{font-style:italic;display:block}
-.cab-hero-sub{max-width:400px;margin-top:1.8rem;font-family:'Josefin Sans',sans-serif;font-size:0.72rem;font-weight:200;letter-spacing:0.08em;color:rgba(247,237,232,0.42);line-height:2.1}
-.cab-split{display:grid;grid-template-columns:1fr 1fr;min-height:75vh;background:#0e0a0c}
-.cab-split-img{position:relative;overflow:hidden}
-.cab-split-img img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.7)}
-.cab-split-text{padding:5.5rem 4rem;display:flex;flex-direction:column;justify-content:center;background:#0e0a0c}
-.cab-split-text .label{font-family:'Josefin Sans',sans-serif;font-size:0.55rem;font-weight:200;letter-spacing:0.4em;text-transform:uppercase;color:#c49a8a;margin-bottom:2rem}
-.cab-split-text h2{font-family:'Fraunces',serif;font-size:clamp(2rem,3.8vw,3.8rem);font-weight:300;color:#f7ede8;line-height:1.1;margin-bottom:1.5rem}
-.cab-split-text h2 em{font-style:italic}
-.cab-split-text p{font-family:'Josefin Sans',sans-serif;font-size:0.72rem;font-weight:200;letter-spacing:0.05em;color:rgba(247,237,232,0.4);line-height:2.1;max-width:380px}
-.cab-features{display:grid;grid-template-columns:repeat(3,1fr);background:#0a0608}
-.cab-feat{padding:3.5rem;border-right:1px solid rgba(196,154,138,0.07)}
-.cab-feat:last-child{border-right:none}
-.cab-feat-num{font-family:'Fraunces',serif;font-size:3rem;font-weight:300;color:#c49a8a;opacity:0.18;margin-bottom:1rem;line-height:1}
-.cab-feat h3{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:#f7ede8;margin-bottom:0.8rem}
-.cab-feat p{font-family:'Josefin Sans',sans-serif;font-size:0.68rem;font-weight:200;letter-spacing:0.04em;color:rgba(247,237,232,0.32);line-height:2}
-.cab-gallery{display:grid;grid-template-columns:1fr 1fr 1fr;height:60vh;background:#0a0608}
-.cab-gal-img{overflow:hidden;position:relative}
-.cab-gal-img img{width:100%;height:100%;object-fit:cover;filter:saturate(0.55);transition:filter .5s,transform 5s}
-.cab-gal-img:hover img{filter:saturate(1);transform:scale(1.03)}
-.cab-gal-label{position:absolute;bottom:1.5rem;left:1.5rem;font-family:'Josefin Sans',sans-serif;font-size:0.52rem;font-weight:200;letter-spacing:0.3em;text-transform:uppercase;color:rgba(247,237,232,0.42)}
-.cab-quote{height:55vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.cab-quote .bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1800&q=80') center/cover no-repeat}
-.cab-quote .ov{position:absolute;inset:0;background:rgba(12,8,10,0.8)}
-.cab-quote-text{position:relative;z-index:2;text-align:center;padding:0 3rem;max-width:800px}
-.cab-quote-text blockquote{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4.2vw,3.5rem);font-weight:300;font-style:italic;color:#f7ede8;line-height:1.3}
-.cab-quote-text cite{display:block;margin-top:1.5rem;font-family:'Josefin Sans',sans-serif;font-size:0.55rem;font-weight:200;letter-spacing:0.35em;text-transform:uppercase;color:#c49a8a}
+/* ══════════════════════════════════
+   5. FOTOS SOBREPOSTAS
+══════════════════════════════════ */
+.overlap-section{
+  background:#f8f6f2;
+  padding:8rem 4rem;
+  position:relative;
+  min-height:70vh;
+}
+.overlap-container{
+  position:relative;
+  max-width:900px;
+  margin:0 auto;
+  height:500px;
+}
+.overlap-img-1{
+  position:absolute;
+  top:0;left:0;
+  width:62%;height:85%;
+  overflow:hidden;
+  z-index:1;
+  box-shadow:0 20px 60px rgba(0,0,0,0.12);
+}
+.overlap-img-1 img{width:100%;height:100%;object-fit:cover;filter:saturate(0.7)}
+.overlap-img-2{
+  position:absolute;
+  bottom:0;right:0;
+  width:55%;height:75%;
+  overflow:hidden;
+  z-index:2;
+  box-shadow:0 20px 60px rgba(0,0,0,0.15);
+}
+.overlap-img-2 img{width:100%;height:100%;object-fit:cover;filter:saturate(0.7)}
+.overlap-label{
+  position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  z-index:3;
+  text-align:center;
+  background:#f8f6f2;
+  padding:2rem 2.5rem;
+  box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+.overlap-label span{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.2rem,2.5vw,2rem);
+  font-weight:300;font-style:italic;
+  color:#0d0d0d;display:block;line-height:1.3;
+}
+.overlap-label small{
+  font-family:'Space Mono',monospace;
+  font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(13,13,13,0.3);margin-top:0.6rem;display:block;
+}
 
-/* ── CONTACTO — Syne ── */
-#contacto{background:#f5f2ed;padding:8rem 4rem 0;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
-.contact-inner{max-width:900px}
-.contact-tag{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:#b5924c;margin-bottom:2rem;display:block}
-.contact-title{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,6vw,6rem);font-weight:800;color:#0d0d0d;line-height:0.95;margin-bottom:1.5rem;letter-spacing:-0.03em}
-.contact-title em{font-style:normal;color:#b5924c}
-.contact-sub{font-family:'Epilogue',sans-serif;font-size:0.82rem;font-weight:300;color:rgba(13,13,13,0.38);max-width:460px;line-height:2;margin-bottom:3.5rem}
-.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:680px}
-.cf{display:flex;flex-direction:column;gap:8px}
-.cf.full{grid-column:1/-1}
-.cf label{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(13,13,13,0.28)}
-.cf input,.cf textarea,.cf select{background:transparent;border:none;border-bottom:1px solid rgba(13,13,13,0.12);padding:10px 0;font-family:'Epilogue',sans-serif;font-size:0.85rem;font-weight:300;color:#0d0d0d;outline:none;transition:border-color .3s;appearance:none;-webkit-appearance:none}
-.cf input:focus,.cf textarea:focus,.cf select:focus{border-bottom-color:#b5924c}
-.cf textarea{resize:none;min-height:90px}
-.cf-submit{grid-column:1/-1;margin-top:0.5rem;display:flex;align-items:center;gap:14px;background:none;border:none;font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:#0d0d0d;cursor:none;padding:0;transition:gap .3s}
-.cf-submit:hover{gap:26px}
-.cf-line{width:44px;height:1px;background:#0d0d0d;transition:width .3s}
-.cf-submit:hover .cf-line{width:68px}
-.contact-footer{margin-top:5rem;padding:2rem 0;border-top:1px solid rgba(13,13,13,0.07);display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:0.52rem;color:rgba(13,13,13,0.2);letter-spacing:0.1em;flex-wrap:wrap;gap:1rem}
-.success-msg{display:none;padding:3rem 0}
-.success-msg h3{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:#0d0d0d;margin-bottom:0.8rem;letter-spacing:-0.03em}
-.success-msg p{font-family:'Epilogue',sans-serif;font-size:0.82rem;font-weight:300;color:rgba(13,13,13,0.38)}
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+footer{
+  background:#0d0d0d;
+  padding:5rem 4rem 3rem;
+}
+.footer-top{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:3rem;padding-bottom:4rem;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.footer-brand{}
+.footer-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:300;font-style:italic;
+  color:#f8f6f2;margin-bottom:1rem;display:block;
+}
+.footer-tagline{
+  font-family:'Epilogue',sans-serif;
+  font-size:0.75rem;font-weight:300;
+  color:rgba(255,255,255,0.25);line-height:1.8;max-width:200px;
+}
+.footer-col-title{
+  font-family:'Space Mono',monospace;
+  font-size:0.52rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(255,255,255,0.2);margin-bottom:1.5rem;display:block;
+}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:0.8rem}
+.footer-links a{
+  font-family:'Epilogue',sans-serif;
+  font-size:0.78rem;font-weight:300;
+  color:rgba(255,255,255,0.45);text-decoration:none;
+  transition:color .3s;
+}
+.footer-links a:hover{color:#fff}
+.footer-contact-email{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-style:italic;
+  color:#f8f6f2;text-decoration:none;display:block;margin-bottom:0.8rem;
+  transition:opacity .3s;
+}
+.footer-contact-email:hover{opacity:0.6}
+.footer-contact-loc{
+  font-family:'Space Mono',monospace;
+  font-size:0.52rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:rgba(255,255,255,0.2);
+}
+.footer-bottom{
+  padding-top:2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'Space Mono',monospace;
+  font-size:0.5rem;letter-spacing:0.12em;
+  color:rgba(255,255,255,0.15);flex-wrap:wrap;gap:1rem;
+}
 
-.theme-divider{height:3px;background:linear-gradient(to right,var(--from),var(--to))}
-
+/* RESPONSIVE */
 @media(max-width:768px){
   nav{padding:1.5rem}
   .menu-overlay{padding:0 1.5rem}
-  .menu-nav li a{font-size:clamp(1.8rem,9vw,3rem)}
-  .rest-split,.tat-text,.dan-split,.arq-grid,.lux-split,.cab-split{grid-template-columns:1fr}
-  .rest-features,.cab-features{grid-template-columns:1fr}
-  .rest-feat,.cab-feat{border-right:none;border-bottom:1px solid rgba(200,149,106,0.07)}
-  .dan-trio,.tat-grid,.cab-gallery{grid-template-columns:1fr 1fr}
-  .tat-cell-big{grid-column:1/-1}
-  .contact-form{grid-template-columns:1fr}
-  .cf.full{grid-column:1}
-  #contacto{padding:6rem 1.5rem 0}
-  .rest-hero-content,.tat-hero-content,.dan-hero-content,.arq-hero-content,.lux-hero-content,.cab-hero-content,.site-hero-content{padding:2rem 1.5rem}
-  .dan-hero-content{text-align:left}
-  .dan-hero .ov{background:linear-gradient(to top,rgba(245,240,235,0.97) 40%,rgba(245,240,235,0.4) 100%)}
+  .menu-nav li a{font-size:clamp(2rem,10vw,3.5rem)}
+  .photo-grid{grid-template-columns:1fr;height:auto}
+  .photo-grid-left,.photo-grid-right{height:50vw}
+  .services{grid-template-columns:1fr;padding:5rem 1.5rem;gap:3rem}
+  .service-desc{display:none}
+  .portfolio{padding:5rem 0 5rem 1.5rem}
+  .portfolio-header{padding-right:1.5rem}
+  .portfolio-item{flex:0 0 260px}
+  .portfolio-item-img{height:340px}
+  .overlap-section{padding:5rem 1.5rem}
+  .overlap-container{height:380px}
+  .footer-top{grid-template-columns:1fr;gap:2.5rem}
+  footer{padding:4rem 1.5rem 2.5rem}
 }
 </style>
 </head>
@@ -280,18 +446,16 @@ nav.nav-visible{transform:translateY(0);opacity:1}
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="progress" id="progress"></div>
 
+<!-- MENU -->
 <div class="menu-overlay" id="menuOverlay">
   <ul class="menu-nav">
-    <li><a href="#restaurante" onclick="closeMenu()"><span class="menu-num">01&nbsp;&nbsp;</span>Restauração</a></li>
-    <li><a href="#tatuagem" onclick="closeMenu()"><span class="menu-num">02&nbsp;&nbsp;</span>Tatuagem</a></li>
-    <li><a href="#danca" onclick="closeMenu()"><span class="menu-num">03&nbsp;&nbsp;</span>Movimento</a></li>
-    <li><a href="#arquitetura" onclick="closeMenu()"><span class="menu-num">04&nbsp;&nbsp;</span>Arquitectura</a></li>
-    <li><a href="#luxo" onclick="closeMenu()"><span class="menu-num">05&nbsp;&nbsp;</span>Luxo</a></li>
-    <li><a href="#cabeleireiros" onclick="closeMenu()"><span class="menu-num">06&nbsp;&nbsp;</span>Cabeleireiros</a></li>
-    <li><a href="#contacto" onclick="closeMenu()"><span class="menu-num">07&nbsp;&nbsp;</span>Contacto</a></li>
+    <li><a href="#servicos" onclick="closeMenu()">Serviços</a></li>
+    <li><a href="#portfolio" onclick="closeMenu()">Portfólio</a></li>
+    <li><a href="#sobre" onclick="closeMenu()">Sobre</a></li>
+    <li><a href="#contacto" onclick="closeMenu()">Contacto</a></li>
   </ul>
   <div class="menu-footer">
-    <a href="#" class="menu-footer-link">Web & Fotografia</a>
+    <a href="#" class="menu-footer-link">Web Design</a>
     <a href="#" class="menu-footer-link">Portugal</a>
     <a href="#contacto" class="menu-cta" onclick="closeMenu()">Iniciar projecto →</a>
   </div>
@@ -304,265 +468,216 @@ nav.nav-visible{transform:translateY(0);opacity:1}
   </button>
 </nav>
 
-<div class="site-hero">
+<!-- 1. VIDEO HERO -->
+<section class="hero">
   <video autoplay muted loop playsinline>
     <source src="https://cdn.coverr.co/videos/coverr-typing-on-laptop-1590/1080p.mp4" type="video/mp4"/>
   </video>
   <div class="hero-ov"></div>
-  <div class="site-hero-content">
-    <span class="site-hero-eyebrow reveal">Web & Fotografia — Portugal</span>
-    <h1 class="reveal reveal-delay-1">Presença<br/><em>digital</em><br/>que convence.</h1>
-    <p class="site-hero-sub reveal reveal-delay-2">Sites e fotografia para negócios que querem ser encontrados, lembrados e escolhidos.</p>
+  <div class="hero-content">
+    <span class="hero-eyebrow reveal">Web Design — Portugal</span>
+    <h1 class="reveal reveal-delay-1">Sites que<br/><em>vendem.</em></h1>
+    <p class="hero-sub reveal reveal-delay-2">Criação de websites para negócios que querem crescer online — com design que impressiona e resultados que ficam.</p>
   </div>
-  <div class="site-hero-scroll">scroll</div>
-</div>
+  <div class="hero-scroll">scroll</div>
+</section>
 
-<div id="restaurante">
-  <div class="rest-hero">
-    <div class="bg"></div><div class="ov"></div>
-    <div class="rest-hero-content">
-      <span class="rest-num reveal">01 / Restauração</span>
-      <h1 class="reveal reveal-delay-1">A mesa<em>perfeita</em></h1>
-      <p class="rest-hero-sub reveal reveal-delay-2">Presença digital que traduz o sabor, o ambiente e a alma de cada restaurante.</p>
-    </div>
+<!-- 2. FOTO GRID -->
+<div class="photo-grid">
+  <div class="photo-grid-left">
+    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=85" alt="Web design process"/>
   </div>
-  <div class="rest-split">
-    <div class="rest-split-img"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&q=80" alt=""/></div>
-    <div class="rest-split-text">
-      <span class="label reveal">O que criamos</span>
-      <h2 class="reveal reveal-delay-1">Um site que se sente<br/><em>como entrar.</em></h2>
-      <p class="reveal reveal-delay-2">Cada restaurante tem uma história. O nosso trabalho é traduzi-la digitalmente — das fotografias ao menu interativo, do sistema de reservas ao tom de voz.</p>
-    </div>
-  </div>
-  <div class="rest-features">
-    <div class="rest-feat reveal"><div class="rest-feat-num">01</div><h3>Menu Digital</h3><p>Atualização em tempo real, fotos dos pratos, alergénios e preços.</p></div>
-    <div class="rest-feat reveal reveal-delay-1"><div class="rest-feat-num">02</div><h3>Reservas Online</h3><p>Sistema de marcação integrado com notificações automáticas.</p></div>
-    <div class="rest-feat reveal reveal-delay-2"><div class="rest-feat-num">03</div><h3>Fotografia de Espaço</h3><p>Imagens profissionais do espaço e dos pratos.</p></div>
-  </div>
-  <div class="rest-quote">
-    <div class="bg"></div><div class="ov"></div>
-    <div class="rest-quote-text">
-      <blockquote class="reveal">"A primeira refeição começa sempre com os olhos — e hoje, começa no telemóvel."</blockquote>
-      <cite class="reveal reveal-delay-1">Filosofia de trabalho</cite>
-    </div>
+  <div class="photo-grid-right">
+    <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=1200&q=85" alt="Design work"/>
   </div>
 </div>
 
-<div class="theme-divider" style="--from:#0d0704;--to:#050505"></div>
-
-<div id="tatuagem">
-  <div class="tat-hero">
-    <div class="bg"></div><div class="ov"></div>
-    <div class="tat-hero-content">
-      <span class="tat-num reveal">02 / Estúdio</span>
-      <h1 class="reveal reveal-delay-1">ARTE<br/>QUE<br/><span>DURA.</span></h1>
-      <p class="tat-hero-sub reveal reveal-delay-2">Sites para estúdios de tatuagem que capturam a identidade do artista — sem compromissos estéticos.</p>
-    </div>
+<!-- 3. SERVIÇOS -->
+<section class="services" id="servicos">
+  <div class="services-left">
+    <span class="services-tag reveal">O que faço</span>
+    <h2 class="services-title reveal reveal-delay-1">Websites<br/>que <em>fazem</em><br/>a diferença.</h2>
+    <a href="#contacto" class="services-cta reveal reveal-delay-2">
+      Falar comigo <div class="cta-line"></div>
+    </a>
   </div>
-  <div class="tat-grid">
-    <div class="tat-cell tat-cell-big"><img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=1200&q=80" alt=""/><div class="tat-cell-overlay"></div><span class="tat-cell-label">Portefólio</span></div>
-    <div class="tat-cell"><img src="https://images.unsplash.com/photo-1605636301447-8f0c81b73db8?w=600&q=80" alt=""/><div class="tat-cell-overlay"></div><span class="tat-cell-label">Detalhe</span></div>
-    <div class="tat-cell"><img src="https://images.unsplash.com/photo-1598520106830-8c45c2035460?w=600&q=80" alt=""/><div class="tat-cell-overlay"></div><span class="tat-cell-label">Estúdio</span></div>
-    <div class="tat-cell"><img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80" alt=""/><div class="tat-cell-overlay"></div><span class="tat-cell-label">Processo</span></div>
-  </div>
-  <div class="tat-text">
-    <div class="tat-text-left"><h2 class="reveal">A IDENTIDADE<br/>DO ARTISTA<br/><em>EM PIXELS.</em></h2></div>
-    <div class="tat-text-right">
-      <p class="reveal">Um estúdio de tatuagem é tão único quanto o trabalho que produz. Criamos sites que comunicam o estilo, a filosofia e o portefólio do artista de forma autêntica.</p>
-      <p class="reveal reveal-delay-1">Galeria de trabalhos, sistema de agendamento, perfis dos artistas e integração com redes sociais.</p>
-    </div>
-  </div>
-</div>
-
-<div class="theme-divider" style="--from:#050505;--to:#faf7f2"></div>
-
-<div id="danca">
-  <div class="dan-hero">
-    <div class="bg"></div><div class="ov"></div>
-    <div class="dan-hero-content">
-      <span class="dan-num reveal">03 / Movimento</span>
-      <h1 class="reveal reveal-delay-1">O corpo<br/><em>em</em><br/>movimento.</h1>
-      <p class="dan-hero-sub reveal reveal-delay-2">Estúdios de dança, Pilates e bem-estar merecem uma presença digital tão fluida quanto os seus movimentos.</p>
-    </div>
-  </div>
-  <div class="dan-split">
-    <div class="dan-split-text">
-      <span class="label reveal">O que fazemos</span>
-      <h2 class="reveal reveal-delay-1">Quando o espaço físico<br/>e digital <em>se encontram.</em></h2>
-      <p class="reveal reveal-delay-2">Horários de aulas, inscrições online, perfis dos professores e galeria de espaço — tudo desenhado para que os alunos se sintam em casa antes de chegar.</p>
-      <p class="reveal reveal-delay-3">A fotografia do espaço e das aulas é parte essencial.</p>
-    </div>
-    <div class="dan-split-img"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=900&q=80" alt=""/></div>
-  </div>
-  <div class="dan-trio">
-    <div class="dan-trio-img"><img src="https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=600&q=80" alt=""/></div>
-    <div class="dan-trio-img"><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" alt=""/></div>
-    <div class="dan-trio-img"><img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80" alt=""/></div>
-  </div>
-</div>
-
-<div class="theme-divider" style="--from:#f5f0eb;--to:#e8e4df"></div>
-
-<div id="arquitetura">
-  <div class="arq-hero">
-    <div class="bg"></div><div class="ov"></div>
-    <div class="arq-hero-content">
-      <span class="arq-num reveal">04 / Arquitectura</span>
-      <h1 class="reveal reveal-delay-1">Espaço.<br/>Forma.<br/><em>Propósito.</em></h1>
-      <p class="arq-hero-sub reveal reveal-delay-2">Para ateliers que exigem precisão visual, rigor tipográfico e portfolios que comunicam antes de uma palavra ser lida.</p>
-    </div>
-  </div>
-  <div class="arq-full">
-    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=85" alt=""/>
-    <span class="arq-full-caption">Arquitectura de interiores · Lisboa</span>
-  </div>
-  <div class="arq-grid">
-    <div class="arq-grid-img"><img src="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?w=900&q=80" alt=""/></div>
-    <div class="arq-grid-text">
-      <span class="label reveal">Ateliers de arquitectura</span>
-      <h2 class="reveal reveal-delay-1">O portefólio<br/>que os projectos<br/>merecem.</h2>
-      <p class="reveal reveal-delay-2">Um atelier de arquitectura é julgado pelo que mostra antes de qualquer reunião. Criamos sites com o rigor e elegância que o trabalho exige.</p>
-    </div>
-  </div>
-</div>
-
-<div class="theme-divider" style="--from:#e8e4df;--to:#0c0b09"></div>
-
-<div id="luxo">
-  <div class="lux-hero">
-    <div class="bg"></div><div class="ov"></div>
-    <div class="lux-hero-content">
-      <span class="lux-num reveal">05 / Luxo</span>
-      <h1 class="reveal reveal-delay-1">Marcas que<br/><em>não precisam</em><br/>de gritar.</h1>
-      <p class="lux-hero-sub reveal reveal-delay-2">Para marcas de excepção — onde cada pixel comunica exclusividade, qualidade e uma história única.</p>
-    </div>
-  </div>
-  <div class="lux-split">
-    <div class="lux-split-img"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=900&q=80" alt=""/></div>
-    <div class="lux-split-text">
-      <span class="label reveal">Marcas premium</span>
-      <h2 class="reveal reveal-delay-1">O silêncio<br/>como linguagem<br/><em>de marca.</em></h2>
-      <p class="reveal reveal-delay-2">As marcas verdadeiramente premium comunicam pelo que não dizem tanto quanto pelo que mostram. Sites que respiram, que deixam espaço.</p>
-    </div>
-  </div>
-  <div class="lux-full">
-    <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1800&q=80" alt=""/>
-    <div class="ov">
-      <div class="lux-full-quote">
-        <p class="reveal">"O luxo não é ostentação — é a ausência da necessidade de a provar."</p>
-        <span class="reveal reveal-delay-1">Filosofia de design</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="theme-divider" style="--from:#0c0b09;--to:#0e0a0c"></div>
-
-<div id="cabeleireiros">
-  <div class="cab-hero">
-    <div class="bg"></div><div class="ov"></div>
-    <div class="cab-hero-content">
-      <span class="cab-num reveal">06 / Cabeleireiros</span>
-      <h1 class="reveal reveal-delay-1">O toque<br/><em>que transforma.</em></h1>
-      <p class="cab-hero-sub reveal reveal-delay-2">Para salões que entendem que a imagem digital é tão importante quanto o resultado final.</p>
-    </div>
-  </div>
-  <div class="cab-split">
-    <div class="cab-split-img"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&q=80" alt=""/></div>
-    <div class="cab-split-text">
-      <span class="label reveal">O que criamos</span>
-      <h2 class="reveal reveal-delay-1">Um site que inspira<br/>antes de <em>entrar.</em></h2>
-      <p class="reveal reveal-delay-2">Cada salão tem a sua personalidade — o seu estilo, a sua equipa, a sua clientela. Criamos a presença digital que comunica exactamente isso.</p>
-    </div>
-  </div>
-  <div class="cab-features">
-    <div class="cab-feat reveal"><div class="cab-feat-num">01</div><h3>Galeria de Trabalhos</h3><p>Antes e depois, cortes, colorações e tratamentos — apresentados com qualidade.</p></div>
-    <div class="cab-feat reveal reveal-delay-1"><div class="cab-feat-num">02</div><h3>Marcações Online</h3><p>Sistema de agendamento por serviço e profissional, com confirmação automática.</p></div>
-    <div class="cab-feat reveal reveal-delay-2"><div class="cab-feat-num">03</div><h3>Fotografia de Espaço</h3><p>O ambiente do salão fotografado com luz e composição editorial.</p></div>
-  </div>
-  <div class="cab-gallery">
-    <div class="cab-gal-img"><img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&q=80" alt=""/><span class="cab-gal-label">Styling</span></div>
-    <div class="cab-gal-img"><img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80" alt=""/><span class="cab-gal-label">Coloração</span></div>
-    <div class="cab-gal-img"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80" alt=""/><span class="cab-gal-label">Corte</span></div>
-  </div>
-  <div class="cab-quote">
-    <div class="bg"></div><div class="ov"></div>
-    <div class="cab-quote-text">
-      <blockquote class="reveal">"O cabelo é a primeira coisa que o mundo vê — o site é a primeira coisa que o cliente sente."</blockquote>
-      <cite class="reveal reveal-delay-1">Filosofia de trabalho</cite>
-    </div>
-  </div>
-</div>
-
-<section id="contacto">
-  <div class="contact-inner">
-    <span class="contact-tag reveal">Vamos trabalhar juntos</span>
-    <h2 class="contact-title reveal reveal-delay-1">Tem um projecto<br/>em <em>mente?</em></h2>
-    <p class="contact-sub reveal reveal-delay-2">Conte-me o que precisa — um site, uma sessão fotográfica, ou os dois. Respondo em menos de 24 horas.</p>
-    <div id="contactForm">
-      <div class="contact-form">
-        <div class="cf reveal"><label>Nome</label><input type="text" id="cName" placeholder="O seu nome"/></div>
-        <div class="cf reveal reveal-delay-1"><label>Email</label><input type="email" id="cEmail" placeholder="email@exemplo.com"/></div>
-        <div class="cf reveal reveal-delay-1">
-          <label>Tipo de negócio</label>
-          <select id="cType">
-            <option value="">Selecionar...</option>
-            <option>Restaurante / Café</option>
-            <option>Estúdio de Tatuagem</option>
-            <option>Dança / Pilates / Bem-estar</option>
-            <option>Atelier de Arquitectura</option>
-            <option>Marca Premium / Luxo</option>
-            <option>Cabeleireiro / Salão de Beleza</option>
-            <option>Outro</option>
-          </select>
-        </div>
-        <div class="cf reveal reveal-delay-2">
-          <label>Serviço</label>
-          <select id="cService">
-            <option value="">Selecionar...</option>
-            <option>Website</option>
-            <option>Fotografia</option>
-            <option>Website + Fotografia</option>
-          </select>
-        </div>
-        <div class="cf full reveal reveal-delay-2"><label>Mensagem</label><textarea id="cMessage" placeholder="Conte-me um pouco sobre o seu projecto..."></textarea></div>
-        <button class="cf-submit reveal reveal-delay-3" onclick="submitContact()">Enviar mensagem <div class="cf-line"></div></button>
-      </div>
-    </div>
-    <div class="success-msg" id="successMsg">
-      <h3>Mensagem recebida.</h3>
-      <p>Entrarei em contacto em breve. Obrigado pelo interesse!</p>
-    </div>
-  </div>
-  <div class="contact-footer">
-    <span>© 2026 Ricardo Henriques</span>
-    <span>Portugal</span>
-    <span>Web & Fotografia</span>
+  <div class="services-right">
+    <ul class="services-list">
+      <li class="reveal">
+        <span class="service-name">Website Institucional</span>
+        <span class="service-desc">Presença digital que representa o negócio com credibilidade</span>
+      </li>
+      <li class="reveal reveal-delay-1">
+        <span class="service-name">Landing Page</span>
+        <span class="service-desc">Uma página focada em converter visitas em clientes</span>
+      </li>
+      <li class="reveal reveal-delay-1">
+        <span class="service-name">Website de Serviços</span>
+        <span class="service-desc">Para clínicas, salões, estúdios e prestadores de serviços</span>
+      </li>
+      <li class="reveal reveal-delay-2">
+        <span class="service-name">Redesign</span>
+        <span class="service-desc">Modernização de sites existentes com resultados visíveis</span>
+      </li>
+    </ul>
   </div>
 </section>
 
+<!-- 4. PORTFÓLIO CARROSSEL -->
+<section class="portfolio" id="portfolio">
+  <div class="portfolio-header">
+    <div>
+      <span class="portfolio-tag">Trabalho recente</span>
+      <h2 class="portfolio-title reveal">Portfólio</h2>
+    </div>
+    <div class="portfolio-arrows">
+      <button class="portfolio-arrow" id="prevBtn" onclick="slidePortfolio(-1)">←</button>
+      <button class="portfolio-arrow" id="nextBtn" onclick="slidePortfolio(1)">→</button>
+    </div>
+  </div>
+
+  <div class="portfolio-track-wrap">
+    <div class="portfolio-track" id="portfolioTrack">
+
+      <!-- Glória — site real -->
+      <div class="portfolio-item">
+        <div class="portfolio-item-img">
+          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=640&q=80" alt="Glória Godinho"/>
+          <div class="portfolio-item-overlay"></div>
+          <div class="portfolio-item-info">
+            <div class="portfolio-item-name">Glória Godinho</div>
+            <div class="portfolio-item-type">Hair & Beauty · Website</div>
+          </div>
+        </div>
+        <a href="https://gloria-godinho-cabelereiros.pages.dev/" target="_blank" class="portfolio-item-link" aria-label="Ver site Glória Godinho"></a>
+      </div>
+
+      <!-- Marisa — site real -->
+      <div class="portfolio-item">
+        <div class="portfolio-item-img">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=640&q=80" alt="Marisa Cabeleireiros"/>
+          <div class="portfolio-item-overlay"></div>
+          <div class="portfolio-item-info">
+            <div class="portfolio-item-name">Marisa Cabeleireiros</div>
+            <div class="portfolio-item-type">Cabeleireiro · Website</div>
+          </div>
+        </div>
+        <a href="https://marisa-cabelereiros.pages.dev/" target="_blank" class="portfolio-item-link" aria-label="Ver site Marisa"></a>
+      </div>
+
+      <!-- Placeholders -->
+      <div class="portfolio-item">
+        <div class="portfolio-item-img placeholder">
+          <div class="placeholder-inner">
+            <div class="placeholder-label">Em breve</div>
+            <div class="placeholder-sub">Restauração</div>
+          </div>
+        </div>
+        <div class="portfolio-item-info" style="position:relative;padding:1rem 0">
+          <div class="portfolio-item-name" style="color:rgba(255,255,255,0.2)">—</div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-item-img placeholder">
+          <div class="placeholder-inner">
+            <div class="placeholder-label">Em breve</div>
+            <div class="placeholder-sub">Arquitectura</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-item-img placeholder">
+          <div class="placeholder-inner">
+            <div class="placeholder-label">Em breve</div>
+            <div class="placeholder-sub">Wellness</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-item-img placeholder">
+          <div class="placeholder-inner">
+            <div class="placeholder-label">Em breve</div>
+            <div class="placeholder-sub">Luxo</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 5. FOTOS SOBREPOSTAS -->
+<section class="overlap-section" id="sobre">
+  <div class="overlap-container reveal">
+    <div class="overlap-img-1">
+      <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=85" alt="Trabalho criativo"/>
+    </div>
+    <div class="overlap-img-2">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=85" alt="Ambiente de trabalho"/>
+    </div>
+    <div class="overlap-label">
+      <span>Design com<br/>propósito.</span>
+      <small>Ricardo Henriques · Portugal</small>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / CONTACTO -->
+<footer id="contacto">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo">Ricardo Henriques</span>
+      <p class="footer-tagline">Web design para negócios que querem crescer online.</p>
+    </div>
+    <div>
+      <span class="footer-col-title">Navegação</span>
+      <ul class="footer-links">
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Contacto</span>
+      <a href="mailto:hello@ricardohenriques.pt" class="footer-contact-email">hello@ricardohenriques.pt</a>
+      <span class="footer-contact-loc">Portugal · Disponível para projetos</span>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Ricardo Henriques</span>
+    <span>Web Design · Portugal</span>
+  </div>
+</footer>
+
 <script>
+// CURSOR
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing')
 let mx=0,my=0,rx=0,ry=0
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'})
-;(function anim(){rx+=(mx-rx)*.22;ry+=(my-ry)*.22;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})()
-document.querySelectorAll('a,button,.cf-submit').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cursor.style.width='14px';cursor.style.height='14px';ring.style.width='52px';ring.style.height='52px'})
-  el.addEventListener('mouseleave',()=>{cursor.style.width='8px';cursor.style.height='8px';ring.style.width='34px';ring.style.height='34px'})
+;(function anim(){rx+=(mx-rx)*.2;ry+=(my-ry)*.2;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})()
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='12px';cursor.style.height='12px';ring.style.width='48px';ring.style.height='48px'})
+  el.addEventListener('mouseleave',()=>{cursor.style.width='7px';cursor.style.height='7px';ring.style.width='30px';ring.style.height='30px'})
 })
 
+// SMART NAV
 const nav=document.getElementById('mainNav')
 let lastScroll=0,menuOpen=false
 window.addEventListener('scroll',()=>{
   const s=window.scrollY
   if(!menuOpen){
-    if(s>lastScroll&&s>120){nav.classList.add('nav-hidden');nav.classList.remove('nav-visible')}
+    if(s>lastScroll&&s>100){nav.classList.add('nav-hidden');nav.classList.remove('nav-visible')}
     else{nav.classList.remove('nav-hidden');nav.classList.add('nav-visible')}
   }
   lastScroll=s
   document.getElementById('progress').style.width=(s/(document.body.scrollHeight-window.innerHeight)*100)+'%'
 })
 
+// MENU
 function toggleMenu(){
   menuOpen=!menuOpen
   document.getElementById('menuOverlay').classList.toggle('open',menuOpen)
@@ -578,23 +693,25 @@ function closeMenu(){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()})
 
-const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12})
+// REVEAL
+const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.1})
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el))
 
-window.addEventListener('scroll',()=>{
-  document.querySelectorAll('.rest-hero .bg,.tat-hero .bg,.dan-hero .bg,.arq-hero .bg,.lux-hero .bg,.cab-hero .bg,.rest-quote .bg,.cab-quote .bg').forEach(bg=>{
-    const r=bg.parentElement.getBoundingClientRect()
-    if(r.bottom>0&&r.top<window.innerHeight)bg.style.transform=`translateY(${r.top/window.innerHeight*22}px) scale(1.05)`
-  })
-})
+// PORTFOLIO CAROUSEL
+const track=document.getElementById('portfolioTrack')
+const itemW=320+24 // width + gap
+let current=0
+const total=6
+const visible=Math.floor((window.innerWidth-64)/itemW)
 
-function submitContact(){
-  if(!document.getElementById('cName').value.trim()||!document.getElementById('cEmail').value.trim()||!document.getElementById('cMessage').value.trim()){alert('Por favor preencha o nome, email e mensagem.');return}
-  document.getElementById('contactForm').style.display='none'
-  document.getElementById('successMsg').style.display='block'
+function slidePortfolio(dir){
+  const max=total-visible
+  current=Math.max(0,Math.min(current+dir,max))
+  track.style.transform=`translateX(-${current*itemW}px)`
 }
 
-document.querySelectorAll('.site-hero .reveal').forEach(el=>el.classList.add('in'))
+// INIT REVEALS
+document.querySelectorAll('.hero .reveal').forEach(el=>el.classList.add('in'))
 </script>
 </body>
 </html>
